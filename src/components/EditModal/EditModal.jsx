@@ -8,14 +8,8 @@ const EditModal = ({
   setError,
   setSeminars,
   seminars,
+  handleModalClick,
 }) => {
-  // закрытие модалки при нажатии вне модалки
-  const handleModalClick = (event) => {
-    if (event.target.className === "modal") {
-      closeModal();
-    }
-  };
-
   // запрос к бд для изменения семинара
   const handleEditSubmit = (event) => {
     event.preventDefault();

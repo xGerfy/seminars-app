@@ -1,8 +1,8 @@
 .section__title {
   text-align: center;
   color: #fff;
-  margin: 20px 0;
   font-size: 40px;
+  margin-bottom: 20px;
 }
 
 .seminars__list {
@@ -73,7 +73,8 @@
 }
 
 .error,
-.loader {
+.loader,
+.no__seminars {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -83,6 +84,10 @@
   font-size: 24px;
   text-align: center;
   padding: 10px;
+}
+
+.no__seminars {
+  height: calc(100vh - 106px);
 }
 
 @media (max-width: 800px) {

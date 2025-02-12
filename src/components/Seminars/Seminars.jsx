@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import EditModal from "../EditModal/EditModal";
+import RemoveModal from "../RemoveModal/RemoveModal";
 import "./Seminars.css";
 
 const Seminars = () => {
@@ -12,8 +13,10 @@ const Seminars = () => {
   const [error, setError] = useState(null);
   // изменение семинара
   const [editingSeminar, setEditingSeminar] = useState(null);
-  // модальное окно
-  const [modalVisible, setModalVisible] = useState(false);
+  // модальное окно редактирования
+  const [editModalVisible, setEditModalVisible] = useState(false);
+  // модальное окно удаления
+  const [removeModalVisible, setRemoveModalVisible] = useState(false);
 
   // подключаемся к бд при загрузке страницы (json-server)
   useEffect(() => {
@@ -29,27 +32,30 @@ const Seminars = () => {
       });
   }, []);
 
-  // функционал удаления семинара
-  const deleteSeminar = (id) => {
-    if (window.confirm("Вы уверены, что хотите удалить этот семинар?")) {
-      fetch(`http://localhost:3000/seminars/${id}`, { method: "DELETE" })
-        .then(() => {
-          setSeminars(seminars.filter((seminar) => seminar.id !== id));
-        })
-        .catch((err) => setError(err));
-    }
-  };
-
   //открытие модалки для редактирования семинара
   const openEditModal = (seminar) => {
     setEditingSeminar(seminar);
-    setModalVisible(true);
+    setEditModalVisible(true);
+  };
+
+  // открытие модалки для удаления семинара
+  const openRemoveModal = (seminar) => {
+    setEditingSeminar(seminar);
+    setRemoveModalVisible(true);
   };
 
   // закрытие модалки
   const closeModal = () => {
-    setModalVisible(false);
+    setEditModalVisible(false);
+    setRemoveModalVisible(false);
     setEditingSeminar(null);
+  };
+
+  // закрытие модалки при нажатии вне модалки
+  const handleModalClick = (event) => {
+    if (event.target.className === "modal") {
+      closeModal();
+    }
   };
 
   // вывод инфы о загрузке и ошибках
@@ -65,36 +71,56 @@ const Seminars = () => {
   return (
     <div className="container">
       <h1 className="section__title">Семинары</h1>
-      <ul className="seminars__list">
-        {seminars.map((seminar) => (
-          <li key={seminar.id} className="seminars__list-item">
-            <img src={seminar.photo} alt={seminar.title} />
-            <div>
+      {seminars.length === 0 ? (
+        <p className="no__seminars">Семинаров нет 😢</p>
+      ) : (
+        <ul className="seminars__list">
+          {seminars.map((seminar) => (
+            <li key={seminar.id} className="seminars__list-item">
+              <img src={seminar.photo} alt={seminar.title} />
               <div>
-                <h2>{seminar.title}</h2>
-                <p>{seminar.description}</p>
+                <div>
+                  <h2>{seminar.title}</h2>
+                  <p>{seminar.description}</p>
+                </div>
+                <div>
+                  <p>Дата: {seminar.date}</p>
+                  <p>Время: {seminar.time}</p>
+                </div>
               </div>
               <div>
-                <p>Дата: {seminar.date}</p>
-                <p>Время: {seminar.time}</p>
+                <button onClick={() => openRemoveModal(seminar)}>
+                  Удалить
+                </button>
+                <button onClick={() => openEditModal(seminar)}>
+                  Редактировать
+                </button>
               </div>
-            </div>
-            <div>
-              <button onClick={() => deleteSeminar(seminar.id)}>Удалить</button>
-              <button onClick={() => openEditModal(seminar)}>
-                Редактировать
-              </button>
-            </div>
-          </li>
-        ))}
-      </ul>
-      {/* модальное окно */}
-      {modalVisible && (
+            </li>
+          ))}
+        </ul>
+      )}
+
+      {/* модальное окно редактирования */}
+      {editModalVisible && (
         <EditModal
           seminars={seminars}
+          handleModalClick={handleModalClick}
           closeModal={closeModal}
           editingSeminar={editingSeminar}
           setEditingSeminar={setEditingSeminar}
+          setError={setError}
+          setSeminars={setSeminars}
+        />
+      )}
+
+      {/* модальное окно удаления */}
+      {removeModalVisible && (
+        <RemoveModal
+          editingSeminar={editingSeminar}
+          seminars={seminars}
+          handleModalClick={handleModalClick}
+          closeModal={closeModal}
           setError={setError}
           setSeminars={setSeminars}
         />

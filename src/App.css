@@ -12,5 +12,18 @@ body {
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 20px;
+}
+
+.error,
+.loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  color: #fff;
+  font-weight: bold;
+  font-size: 24px;
+  text-align: center;
+  padding: 10px;
 }

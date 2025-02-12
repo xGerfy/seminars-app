@@ -1,0 +1,17 @@
+.modal > div {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background: #222222;
+  color: #fff;
+  border: 1px solid #606060;
+  padding: 30px;
+  border-radius: 30px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  width: 320px;
+  text-align: center;
+}
+
+.modal > div > h2:first-child {
+  color: #9aeba3;
+}

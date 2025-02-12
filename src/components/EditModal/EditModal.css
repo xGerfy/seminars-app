@@ -36,7 +36,6 @@
 
 .modal button {
   background-color: #9aeba3;
-  color: white;
   border: none;
   padding: 10px 15px;
   border-radius: 50px;
@@ -50,17 +49,4 @@
 .modal button:hover {
   background-color: #2f4732;
   color: #fff;
-}
-
-.error,
-.loader {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  color: #fff;
-  font-weight: bold;
-  font-size: 24px;
-  text-align: center;
-  padding: 10px;
 }
