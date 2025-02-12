@@ -1,12 +1,8 @@
 import "./App.css";
-import Seminars from "./components/Seminars";
+import Seminars from "./components/Seminars/Seminars";
 
 function App() {
-  return (
-    <>
-      <Seminars />
-    </>
-  );
+  return <Seminars />;
 }
 
 export default App;

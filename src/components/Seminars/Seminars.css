@@ -1,0 +1,101 @@
+.section__title {
+  text-align: center;
+  color: #fff;
+  margin: 20px 0;
+  font-size: 40px;
+}
+
+.seminars__list {
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+
+.seminars__list-item {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  background: #222222;
+  color: #fff;
+  padding: 30px;
+  border: 1px solid #606060;
+  border-radius: 30px;
+}
+
+.seminars__list-item > div:nth-child(2) {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.seminars__list-item > div:nth-child(2) > div {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 350px;
+}
+
+.seminars__list-item > div:last-child {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-left: auto;
+}
+
+.seminars__list-item h2 {
+  margin: 0;
+  color: #9aeba3;
+}
+
+.seminars__list-item img {
+  width: 150px;
+  height: 150px;
+  border-radius: 5px;
+}
+
+.seminars__list-item button {
+  background-color: #9aeba3;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 50px;
+  cursor: pointer;
+  color: #141414;
+  font-weight: bold;
+  transition: all 0.3s ease-in-out;
+}
+
+.seminars__list-item button:hover {
+  background-color: #2f4732;
+  color: #fff;
+}
+
+.error,
+.loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  color: #fff;
+  font-weight: bold;
+  font-size: 24px;
+  text-align: center;
+  padding: 10px;
+}
+
+@media (max-width: 800px) {
+  .seminars__list-item {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .seminars__list-item > div:nth-child(2) {
+    flex-direction: column;
+  }
+  .seminars__list-item > div:last-child {
+    margin-left: 0;
+    width: 100%;
+  }
+}
